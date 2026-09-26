@@ -1,6 +1,6 @@
 // Cache para que la app abra sin señal. Sirve desde caché y actualiza en segundo plano.
 const CACHE = 'estacionamiento-v1';
-const ASSETS = ['/', '/index.html', '/app.js', '/data.js', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png', '/apple-touch-icon.png'];
+const ASSETS = ['/', '/index.html', '/app.js', '/data.js', '/manifest.webmanifest', '/icon-192.png', '/icon.svg', '/apple-touch-icon.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));

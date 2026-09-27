@@ -105,6 +105,19 @@
   .cash .plus, .bg-cash { background: var(--cash); }
   .transfer .plus, .bg-transfer { background: var(--transfer); }
   .free .plus { background: var(--free); }
+  .plus.c-cash { background: var(--cash); }
+  .plus.c-mp { background: var(--transfer); }
+  .plus.c-qr { background: var(--free); }
+
+  /* pestañas */
+  .tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 4px; margin-bottom: 12px; }
+  .tabs button { padding: 11px 8px; border-radius: 10px; font-weight: 700; font-size: 15px; color: var(--muted); background: none; }
+  .tabs button.on { background: var(--card2); color: var(--text); }
+  .split3 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .split3 div { background: var(--card2); border-radius: 12px; padding: 8px 10px; }
+  .split3 b { display: block; font-size: 22px; font-variant-numeric: tabular-nums; }
+  .split3 small { color: var(--muted); font-size: 12.5px; }
+  .section-title { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .6px; font-weight: 700; margin: 16px 2px 0; }
 
   .actions { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .actions button { background: var(--card2); padding: 14px; border-radius: 12px; font-weight: 700; font-size: 15px; }
@@ -148,6 +161,12 @@
     <button class="ghost" id="openLists">📋 Listas</button>
   </header>
 
+  <nav class="tabs">
+    <button id="tabBtn1" data-tab="1">Hasta 2:20</button>
+    <button id="tabBtn2" data-tab="2">Desde 2:20</button>
+  </nav>
+
+  <div id="tab1">
   <section class="summary">
     <div class="total-label">Recaudado</div>
     <div class="total" id="total">$ 0</div>
@@ -190,6 +209,34 @@
     <button id="share">📤 Mandar resumen</button>
   </div>
   <div class="last" id="last"></div>
+  </div>
+
+  <!-- Seguimiento desde las 2:20: se guarda aparte -->
+  <div id="tab2" hidden>
+    <section class="summary">
+      <div class="total-label">Recaudado desde las 2:20</div>
+      <div class="total" id="total2">$ 0</div>
+      <div class="split">
+        <div><small>💵 Efectivo</small><b id="cash2">$ 0</b></div>
+        <div><small>📲 Mercado Pago</small><b id="mp2">$ 0</b></div>
+      </div>
+      <div class="split3">
+        <div><small>🧍 Personas</small><b id="people2">0</b><small id="people2Detail">0 QR · 0 cobradas</small></div>
+        <div><small>🚗 Autos</small><b id="cars2">0</b><small>estacionamientos</small></div>
+      </div>
+    </section>
+
+    <div class="section-title">Entradas</div>
+    <section class="counters" id="counters2Ent"></section>
+    <div class="section-title">Estacionamiento</div>
+    <section class="counters" id="counters2Est"></section>
+
+    <div class="actions">
+      <button id="undo2">↩️ Deshacer último</button>
+      <button id="share2">📤 Mandar resumen</button>
+    </div>
+    <div class="last" id="last2"></div>
+  </div>
 
   <!-- Panel de listas / ajustes -->
   <div class="panel" id="panel">
@@ -252,5 +299,6 @@
 
   <script src="/data.js"></script>
   <script src="/app.js"></script>
+  <script src="/app2.js"></script>
 </body>
 </html>

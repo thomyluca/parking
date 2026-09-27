@@ -144,7 +144,7 @@
 </head>
 <body>
   <header>
-    <h1>🚗 Estacionamiento</h1>
+    <h1>🎟️ Puerta</h1>
     <button class="ghost" id="openLists">📋 Listas</button>
   </header>
 
@@ -153,10 +153,10 @@
     <div class="total" id="total">$ 0</div>
     <div class="split">
       <div><small>💵 Efectivo</small><b id="cashMoney">$ 0</b></div>
-      <div><small>📲 Transferencia</small><b id="transferMoney">$ 0</b></div>
+      <div><small>📲 Mercado Pago</small><b id="transferMoney">$ 0</b></div>
     </div>
     <div class="inside">
-      <div><small class="hint">Autos adentro</small><br><b id="inside">0</b></div>
+      <div><small class="hint">Entradas</small><br><b id="inside">0</b></div>
       <span id="insideDetail">0 pagos · 0 gratis</span>
     </div>
   </section>
@@ -170,13 +170,13 @@
   <section class="counters">
     <div class="counter cash">
       <button class="minus" data-k="cash" data-d="-1" aria-label="Restar efectivo">−</button>
-      <div class="info"><div class="name">💵 Efectivo</div><div class="n" id="nCash">0</div><div class="sub" id="pCash">$ 10.000 c/u</div></div>
+      <div class="info"><div class="name">💵 Efectivo</div><div class="n" id="nCash">0</div><div class="sub" id="pCash">$ 25.000 c/u</div></div>
       <button class="plus" data-k="cash" data-d="1" aria-label="Sumar efectivo">+</button>
     </div>
     <div class="counter transfer">
-      <button class="minus" data-k="transfer" data-d="-1" aria-label="Restar transferencia">−</button>
-      <div class="info"><div class="name">📲 Transferencia</div><div class="n" id="nTransfer">0</div><div class="sub" id="pTransfer">$ 15.000 c/u</div></div>
-      <button class="plus" data-k="transfer" data-d="1" aria-label="Sumar transferencia">+</button>
+      <button class="minus" data-k="transfer" data-d="-1" aria-label="Restar Mercado Pago">−</button>
+      <div class="info"><div class="name">📲 Mercado Pago</div><div class="n" id="nTransfer">0</div><div class="sub" id="pTransfer">$ 25.000 c/u</div></div>
+      <button class="plus" data-k="transfer" data-d="1" aria-label="Sumar Mercado Pago">+</button>
     </div>
     <div class="counter free">
       <button class="minus" data-k="free" data-d="-1" aria-label="Restar gratis">−</button>
@@ -234,7 +234,7 @@
       <div class="box">
         <div class="prices">
           <div class="field"><label>Efectivo</label><input id="priceCash" type="number" inputmode="numeric"></div>
-          <div class="field"><label>Transferencia</label><input id="priceTransfer" type="number" inputmode="numeric"></div>
+          <div class="field"><label>Mercado Pago</label><input id="priceTransfer" type="number" inputmode="numeric"></div>
         </div>
         <div class="hint">Los totales se recalculan con estos precios.</div>
       </div>

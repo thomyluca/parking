@@ -3,12 +3,15 @@
 
   const STORAGE_KEY = 'estacionamiento-v1';
   const TIPOS = { mesa: 'Mesa VIP', cumple: 'Cumpleaños', cortesia: 'Cortesía', otro: 'Otro' };
-  const KIND_LABEL = { cash: '💵 Efectivo', transfer: '📲 Transferencia', free: '🎟️ Gratis' };
+  const KIND_LABEL = { cash: '💵 Efectivo', transfer: '📲 Mercado Pago', free: '🎟️ Gratis' };
 
   // ───────── estado persistente ─────────
+  // Subir PRICE_VERSION cuando cambian los precios por defecto, para pisar los guardados.
+  const PRICE_VERSION = 2;
   const defaultState = () => ({
     counts: { cash: 0, transfer: 0, free: 0 },
-    prices: { cash: 10000, transfer: 15000 },
+    prices: { cash: 25000, transfer: 25000 },
+    priceVersion: PRICE_VERSION,
     custom: [],      // [{id, tipo, nombre, nota, patentes:[]}]
     entered: {},     // { plateKey: timestamp } patentes gratis que ya entraron
     log: [],         // [{t, k, d, plate?}]
@@ -24,7 +27,8 @@
       const d = defaultState();
       return {
         counts: { ...d.counts, ...(s.counts || {}) },
-        prices: { ...d.prices, ...(s.prices || {}) },
+        prices: s.priceVersion === PRICE_VERSION ? { ...d.prices, ...(s.prices || {}) } : d.prices,
+        priceVersion: PRICE_VERSION,
         custom: Array.isArray(s.custom) ? s.custom : [],
         entered: s.entered || {},
         log: Array.isArray(s.log) ? s.log : [],
@@ -203,10 +207,10 @@
     } else if (matches.length) {
       html += `<div class="verdict ok" style="color:var(--amber);background:var(--amber-bg);border-color:#6b4a0c">🔎 ¿Es alguna de estas?<small>Revisá la patente del auto antes de dejarlo pasar gratis</small></div>`;
     } else if (qn.length >= 5) {
-      html += `<div class="verdict no">❌ NO ESTÁ EN LA LISTA<small>Cobrar estacionamiento</small></div>
+      html += `<div class="verdict no">❌ NO ESTÁ EN LA LISTA<small>Cobrar entrada</small></div>
         <div class="pay-now">
           <button class="bg-cash" data-pay="cash">💵 Efectivo<br>${money(state.prices.cash)}</button>
-          <button class="bg-transfer" data-pay="transfer">📲 Transfer<br>${money(state.prices.transfer)}</button>
+          <button class="bg-transfer" data-pay="transfer">📲 Mercado Pago<br>${money(state.prices.transfer)}</button>
         </div>`;
     } else {
       html += `<div class="hint" style="padding:4px 2px">Seguí escribiendo…</div>`;
@@ -298,11 +302,11 @@
     const t = totals();
     const c = state.counts;
     const now = new Date().toLocaleString('es-AR', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' });
-    return `🚗 Estacionamiento (${now})\n` +
-      `Autos adentro: ${t.inside}\n` +
-      `💵 Efectivo: ${c.cash} autos = ${money(t.cash)}\n` +
-      `📲 Transferencia: ${c.transfer} autos = ${money(t.transfer)}\n` +
-      `🎟️ Gratis: ${c.free} autos\n` +
+    return `🎟️ Puerta (${now})\n` +
+      `Entradas: ${t.inside}\n` +
+      `💵 Efectivo: ${c.cash} = ${money(t.cash)}\n` +
+      `📲 Mercado Pago: ${c.transfer} = ${money(t.transfer)}\n` +
+      `🎟️ Gratis: ${c.free}\n` +
       `💰 TOTAL: ${money(t.total)}`;
   }
 
